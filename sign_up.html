@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet">
+    <title>Login Akun</title>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- <link
+        href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+        rel="stylesheet" /> -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Mona+Sans:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+            rel="stylesheet" />
+</head>
+
+<body class="font-['mona_sans']">
+    <main class="container mx-auto overflow-hidden md:overflow-auto min-h-screen grid grid-cols-1 md:grid-cols-2">
+        <section class="w-full mx-auto px-8 md:pl-18 md:pr-24 py-12">
+            <header class="flex flex-col items-start justify-between">
+                <span class="logo flex items-center gap-4">
+                    <img src="osis_logo_unofficial.png" alt="logo osis" class="size-6.5 object-cover rounded-full overflow-visible">
+                    <span class="flex flex-col">
+                        <span class="school-name text-sm font-medium">SMA 1 Indramayu</span>
+                        <span class="slogan text-xs font-medium text-gray-500">Unggul dalam Ilmu, Berkarakter Mulia</span>
+                    </span>
+                </span>
+                <div class="space-y-3.5">
+                    <h1 class="text-3xl md:text-5xl font-bold mt-10 text-start md:leading-14">Create Your Account</h1>
+                    <p class="text-gray-500">It only takes a minute to create your account.</p>
+                </div>
+            </header>
+            <form action="" class="space-y-6 md:space-y-4 mt-10 md:mt-16">
+                <input type="text"
+                    class="block w-full border border-gray-300 rounded-xl md:rounded-lg p-4 md:p-3 focus:outline-none focus:ring-1 focus:ring-purple-600 text-base md:text-sm"
+                    placeholder="Full Name">
+                <input type="text"
+                    class="block w-full border border-gray-300 rounded-xl md:rounded-lg p-4 md:p-3 focus:outline-none focus:ring-1 focus:ring-purple-600 text-base md:text-sm"
+                    placeholder="Email Address">
+                <div class="relative">
+                    <input type="password"
+                        class="block w-full border border-gray-300 rounded-xl md:rounded-lg p-4 md:p-3 focus:outline-none focus:ring-1 focus:ring-purple-600 text-base md:text-sm"
+                        placeholder="Password">
+                    <iconify-icon icon="iconamoon:eye-off-light" width="20" height="20"
+                        class="absolute top-1/2 right-5 -translate-y-1/2 text-gray-500"></iconify-icon>
+                </div>
+                <div class="relative">
+                    <input type="password"
+                        class="block w-full border border-gray-300 rounded-xl md:rounded-lg p-4 md:p-3 focus:outline-none focus:ring-1 focus:ring-purple-600 text-base md:text-sm"
+                        placeholder="Confirm Password">
+                    <iconify-icon icon="iconamoon:eye-off-light" width="20" height="20"
+                        class="absolute top-1/2 right-5 -translate-y-1/2 text-gray-500"></iconify-icon>
+                </div>
+                <button type="submit"
+                    class="w-full text-white py-3.5 px-10 mt-4 rounded-xl md:rounded-lg bg-purple-700 hover:bg-purple-600 active:bg-purple-700 transition-all text-base md:text-sm font-medium cursor-pointer">Create Account</button>
+            </form>
+            <div class="flex items-center my-5">
+                <hr class="flex-grow border-t border-gray-300">
+                <span class="mx-4 text-gray-500 text-sm">or</span>
+                <hr class="flex-grow border-t border-gray-300">
+            </div>
+            <button
+                class="w-full flex items-center justify-center gap-4 text-purple-700 hover:bg-purple-100/70 transition-all py-3 px-10 rounded-xl md:rounded-lg border border-purple-700 text-sm font-medium cursor-pointer">
+                <iconify-icon icon="flat-color-icons:google" width="20" height="20"></iconify-icon>
+                Sign Up with Google
+            </button>
+            <span class="block text-sm text-gray-500 mt-8 text-center">
+                Already have an account? <a href="sign_in.html" class="text-purple-700 hover:underline font-medium">Sign In</a>
+            </span>
+        </section>
+        <section class="illustration container w-full h-full hidden md:block p-2">
+            <img src="login_illustration.webp" alt="ilustrasi login" class="w-full h-full object-cover rounded-2xl">
+        </section>
+    </main>
+</body>
+
+</html>

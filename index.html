@@ -1,0 +1,629 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet">
+    <title>Voting Ketua OSIS 2025</title>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body class="font-['Space_Grotesk'] bg-yellow-300 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b-4 border-black p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-black text-yellow-300 border-2 border-black flex items-center justify-center font-black text-lg">
+                    E
+                </div>
+                <span class="font-black text-xl text-black">EVOTINGKITA</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-4">
+                <span class="text-sm font-bold text-black bg-green-200 px-3 py-1 border-2 border-black">
+                    <iconify-icon icon="mdi:account" width="14" height="14" class="inline mr-1"></iconify-icon>
+                    NISN: 1234567890
+                </span>
+                <button
+                    class="text-sm font-bold text-white bg-red-500 px-3 py-1 border-2 border-black hover:bg-red-600 transition-colors">
+                    LOGOUT
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Vote Status & Timer -->
+        <div class="max-w-4xl mx-auto mb-8">
+            <div class="bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-black text-black mb-2">
+                            PEMILIHAN KETUA OSIS 2025
+                        </h1>
+                        <p
+                            class="text-base font-medium text-gray-700 bg-blue-100 border-2 border-black p-2 inline-block">
+                            Pilih kandidat terbaik menurut Anda! 🗳️
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <div class="bg-red-100 border-2 border-black p-3">
+                            <p class="text-sm font-bold text-black">WAKTU TERSISA</p>
+                            <p class="text-2xl font-black text-red-600" id="countdown">02:45:30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting Stats -->
+        <div class="max-w-4xl mx-auto mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white border-3 border-black shadow-[4px_4px_0px_0px_#000] p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-500 border-2 border-black flex items-center justify-center">
+                            <iconify-icon icon="mdi:vote" width="20" height="20" class="text-white"></iconify-icon>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-600">TOTAL VOTE</p>
+                            <p class="text-lg font-black text-black">1,247</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white border-3 border-black shadow-[4px_4px_0px_0px_#000] p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-green-500 border-2 border-black flex items-center justify-center">
+                            <iconify-icon icon="mdi:account-group" width="20" height="20"
+                                class="text-white"></iconify-icon>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-600">PARTISIPASI</p>
+                            <p class="text-lg font-black text-black">78.9%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white border-3 border-black shadow-[4px_4px_0px_0px_#000] p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-purple-500 border-2 border-black flex items-center justify-center">
+                            <iconify-icon icon="mdi:account-star" width="20" height="20"
+                                class="text-white"></iconify-icon>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-600">KANDIDAT</p>
+                            <p class="text-lg font-black text-black">3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidates Section -->
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Candidate 1 -->
+                <div
+                    class="candidate-card bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] overflow-hidden">
+                    <!-- Candidate Number -->
+                    <div class="bg-blue-500 text-white text-center py-2 border-b-3 border-black">
+                        <span class="text-3xl font-black">01</span>
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="p-4 border-b-3 border-black">
+                        <div
+                            class="w-full h-48 bg-gradient-to-br from-blue-200 to-blue-400 border-3 border-black flex items-center justify-center">
+                            <iconify-icon icon="mdi:account" width="80" height="80" class="text-black"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Candidate Info -->
+                    <div class="p-4 border-b-3 border-black">
+                        <h3 class="text-xl font-black text-black mb-1">AHMAD RIZKI</h3>
+                        <p
+                            class="text-sm font-bold text-gray-600 bg-gray-100 border-2 border-black px-2 py-1 inline-block">
+                            KELAS XI IPA 2
+                        </p>
+                    </div>
+
+                    <!-- Vision & Mission -->
+                    <div class="p-4 border-b-3 border-black">
+                        <h4
+                            class="text-sm font-black text-black mb-2 bg-yellow-200 border-2 border-black px-2 py-1 inline-block">
+                            VISI & MISI
+                        </h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            "Membangun OSIS yang solid, kreatif, dan berprestasi dengan program-program inovatif untuk
+                            kemajuan sekolah dan siswa."
+                        </p>
+                    </div>
+
+                    <!-- Vote Button -->
+                    <div class="p-4">
+                        <button onclick="vote(1, 'Ahmad Rizki')"
+                            class="w-full bg-blue-500 text-white border-3 border-black py-3 text-lg font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] active:translate-x-2 active:translate-y-2 active:shadow-[2px_2px_0px_0px_#000] transition-all">
+                            PILIH KANDIDAT 01
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Candidate 2 -->
+                <div
+                    class="candidate-card bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] overflow-hidden">
+                    <!-- Candidate Number -->
+                    <div class="bg-green-500 text-white text-center py-2 border-b-3 border-black">
+                        <span class="text-3xl font-black">02</span>
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="p-4 border-b-3 border-black">
+                        <div
+                            class="w-full h-48 bg-gradient-to-br from-green-200 to-green-400 border-3 border-black flex items-center justify-center">
+                            <iconify-icon icon="mdi:account" width="80" height="80" class="text-black"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Candidate Info -->
+                    <div class="p-4 border-b-3 border-black">
+                        <h3 class="text-xl font-black text-black mb-1">SARI INDAH</h3>
+                        <p
+                            class="text-sm font-bold text-gray-600 bg-gray-100 border-2 border-black px-2 py-1 inline-block">
+                            KELAS XI IPS 1
+                        </p>
+                    </div>
+
+                    <!-- Vision & Mission -->
+                    <div class="p-4 border-b-3 border-black">
+                        <h4
+                            class="text-sm font-black text-black mb-2 bg-yellow-200 border-2 border-black px-2 py-1 inline-block">
+                            VISI & MISI
+                        </h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            "Menciptakan lingkungan sekolah yang harmonis dan berprestasi melalui kegiatan yang
+                            bermanfaat dan networking yang kuat."
+                        </p>
+                    </div>
+
+                    <!-- Vote Button -->
+                    <div class="p-4">
+                        <button onclick="vote(2, 'Sari Indah')"
+                            class="w-full bg-green-500 text-white border-3 border-black py-3 text-lg font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] active:translate-x-2 active:translate-y-2 active:shadow-[2px_2px_0px_0px_#000] transition-all">
+                            PILIH KANDIDAT 02
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Candidate 3 -->
+                <div
+                    class="candidate-card bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] overflow-hidden">
+                    <!-- Candidate Number -->
+                    <div class="bg-purple-500 text-white text-center py-2 border-b-3 border-black">
+                        <span class="text-3xl font-black">03</span>
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="p-4 border-b-3 border-black">
+                        <div
+                            class="w-full h-48 bg-gradient-to-br from-purple-200 to-purple-400 border-3 border-black flex items-center justify-center">
+                            <iconify-icon icon="mdi:account" width="80" height="80" class="text-black"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Candidate Info -->
+                    <div class="p-4 border-b-3 border-black">
+                        <h3 class="text-xl font-black text-black mb-1">BAYU PRATAMA</h3>
+                        <p
+                            class="text-sm font-bold text-gray-600 bg-gray-100 border-2 border-black px-2 py-1 inline-block">
+                            KELAS XI MIPA 3
+                        </p>
+                    </div>
+
+                    <!-- Vision & Mission -->
+                    <div class="p-4 border-b-3 border-black">
+                        <h4
+                            class="text-sm font-black text-black mb-2 bg-yellow-200 border-2 border-black px-2 py-1 inline-block">
+                            VISI & MISI
+                        </h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            "Fokus pada pengembangan talenta siswa melalui workshop, kompetisi, dan kegiatan
+                            ekstrakurikuler yang berkualitas."
+                        </p>
+                    </div>
+
+                    <!-- Vote Button -->
+                    <div class="p-4">
+                        <button onclick="vote(3, 'Bayu Pratama')"
+                            class="w-full bg-purple-500 text-white border-3 border-black py-3 text-lg font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] active:translate-x-2 active:translate-y-2 active:shadow-[2px_2px_0px_0px_#000] transition-all">
+                            PILIH KANDIDAT 03
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting Rules -->
+        <div class="max-w-4xl mx-auto mt-8">
+            <div class="bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] p-6">
+                <h3 class="text-xl font-black text-black mb-4 bg-red-200 border-2 border-black px-3 py-2 inline-block">
+                    ⚠️ ATURAN VOTING
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 bg-black text-white flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-xs">
+                            1
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">Setiap siswa hanya dapat memberikan SATU suara</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 bg-black text-white flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-xs">
+                            2
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">Voting akan ditutup sesuai waktu yang ditentukan
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 bg-black text-white flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-xs">
+                            3
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">Pilihan tidak dapat diubah setelah submit</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 bg-black text-white flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-xs">
+                            4
+                        </div>
+                        <p class="text-sm font-medium text-gray-700">Hasil akan diumumkan secara transparan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white border-t-4 border-white mt-12 p-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm font-medium">© 2025 EVotingKita - Sistem Voting Digital Sekolah</p>
+        </div>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white border-4 border-black shadow-[12px_12px_0px_0px_#000] p-6 max-w-md w-full">
+            <h3 class="text-2xl font-black text-black mb-4">KONFIRMASI PILIHAN</h3>
+            <p class="text-base font-medium text-gray-700 mb-4">
+                Anda akan memilih kandidat:
+            </p>
+            <div class="bg-yellow-100 border-2 border-black p-3 mb-6">
+                <p class="text-lg font-black text-black" id="selectedCandidate">-</p>
+            </div>
+            <p class="text-sm font-medium text-red-600 mb-6">
+                ⚠️ Pilihan tidak dapat diubah setelah dikonfirmasi!
+            </p>
+            <div class="flex gap-3">
+                <button onclick="closeModal()"
+                    class="flex-1 bg-gray-300 text-black border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                    BATAL
+                </button>
+                <button onclick="confirmVote()"
+                    class="flex-1 bg-green-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                    KONFIRMASI
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white border-4 border-black shadow-[16px_16px_0px_0px_#000] p-8 max-w-lg w-full">
+            <!-- Success Icon -->
+            <div class="text-center mb-6">
+                <div
+                    class="w-16 h-16 bg-green-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+                    <iconify-icon icon="mdi:check-bold" width="32" height="32" class="text-white"></iconify-icon>
+                </div>
+                <h3 class="text-3xl font-black text-black mb-2">VOTING BERHASIL!</h3>
+                <div class="bg-green-100 border-2 border-black p-3 inline-block">
+                    <iconify-icon icon="mdi:party-popper" width="20" height="20" class="text-black mr-2"></iconify-icon>
+                    <span class="font-bold text-green-800">Terima kasih atas partisipasi Anda!</span>
+                </div>
+            </div>
+
+            <!-- Vote Details -->
+            <div class="bg-yellow-100 border-3 border-black p-4 mb-6">
+                <h4 class="text-sm font-black text-black mb-2 bg-black px-2 py-1 inline-block">
+                    PILIHAN ANDA
+                </h4>
+                <p class="text-xl font-black text-black" id="votedCandidate">-</p>
+                <p class="text-sm text-gray-600 mt-1">
+                    <iconify-icon icon="mdi:clock-outline" width="14" height="14" class="mr-1"></iconify-icon>
+                    <span id="voteTime"></span>
+                </p>
+            </div>
+
+            <!-- Success Message -->
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 border-2 border-black p-4">
+                    <h4 class="font-black text-black mb-2">🗳️ VOTE ANDA TELAH TERCATAT!</h4>
+                    <p class="text-sm text-gray-700 mb-2">
+                        Suara Anda sangat berarti untuk masa depan OSIS yang lebih baik.
+                    </p>
+                    <p class="text-xs font-medium text-gray-600 bg-gray-100 border border-black p-2">
+                        <iconify-icon icon="mdi:shield-check" width="12" height="12" class="mr-1"></iconify-icon>
+                        Data voting disimpan dengan aman dan terenkripsi
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="closeSuccessModal()"
+                    class="flex-1 bg-blue-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                    LIHAT HASIL SEMENTARA
+                </button>
+                <button onclick="showLogoutModal()"
+                    class="flex-1 bg-red-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                    LOGOUT
+                </button>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="mt-6 text-center">
+                <p class="text-xs text-gray-600 bg-pink-100 border-2 border-black p-2">
+                    <iconify-icon icon="mdi:information-outline" width="12" height="12" class="mr-1"></iconify-icon>
+                    Hasil final akan diumumkan setelah periode voting berakhir
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 hidden z-50">
+        <div class="bg-white border-4 border-black shadow-[12px_12px_0px_0px_#000] p-6 max-w-md w-full">
+            <!-- Logout Icon -->
+            <div class="text-center mb-6">
+                <div
+                    class="w-16 h-16 bg-red-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+                    <iconify-icon icon="mdi:logout" width="32" height="32" class="text-white"></iconify-icon>
+                </div>
+                <h3 class="text-2xl font-black text-black mb-2">KONFIRMASI LOGOUT</h3>
+            </div>
+
+            <!-- Logout Message -->
+            <div class="text-center mb-6">
+                <div class="bg-yellow-100 border-2 border-black p-4">
+                    <p class="text-base font-medium text-gray-700 mb-2">
+                        Apakah Anda yakin ingin keluar dari sistem?
+                    </p>
+                    <p class="text-sm text-red-600 font-bold">
+                        ⚠️ Anda akan kembali ke halaman login
+                    </p>
+                </div>
+            </div>
+
+            <!-- Logout Info -->
+            <div class="mb-6">
+                <div class="bg-blue-100 border-2 border-black p-3">
+                    <h4 class="font-black text-black mb-2 text-sm">INFORMASI SESI:</h4>
+                    <p class="text-xs text-gray-700">
+                        <iconify-icon icon="mdi:account" width="12" height="12" class="mr-1"></iconify-icon>
+                        NISN: 1234567890
+                    </p>
+                    <p class="text-xs text-gray-700">
+                        <iconify-icon icon="mdi:clock-outline" width="12" height="12" class="mr-1"></iconify-icon>
+                        <span id="sessionTime"></span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+                <button onclick="closeLogoutModal()"
+                    class="flex-1 bg-gray-300 text-black border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                    BATAL
+                </button>
+                <button onclick="confirmLogout()"
+                    class="flex-1 bg-red-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                    YA, LOGOUT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedCandidateNumber = null;
+        let selectedCandidateName = null;
+        let hasVoted = false; // Track voting status
+        let sessionStartTime = new Date(); // Track session start time
+
+        // Countdown timer
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const now = new Date();
+            const hours = 2;
+            const minutes = 45 - now.getMinutes() % 60;
+            const seconds = 30 - now.getSeconds() % 60;
+
+            countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Vote function
+        function vote(candidateNumber, candidateName) {
+            // Prevent voting if already voted
+            if (hasVoted) {
+                alert('Anda sudah melakukan voting!');
+                return;
+            }
+
+            selectedCandidateNumber = candidateNumber;
+            selectedCandidateName = candidateName;
+
+            document.getElementById('selectedCandidate').textContent = `${candidateNumber.toString().padStart(2, '0')} - ${candidateName}`;
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            selectedCandidateNumber = null;
+            selectedCandidateName = null;
+        }
+
+        // Confirm vote
+        function confirmVote() {
+            if (selectedCandidateNumber && selectedCandidateName) {
+                // Close confirmation modal
+                closeModal();
+
+                // Mark as voted
+                hasVoted = true;
+
+                // Show success modal only after voting
+                showSuccessModal();
+
+                // Disable all vote buttons after voting
+                const buttons = document.querySelectorAll('.candidate-card button');
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    button.classList.add('opacity-50', 'cursor-not-allowed');
+                    button.textContent = 'SUDAH MEMILIH';
+                });
+            }
+        }
+
+        // Show success modal (only if voted)
+        function showSuccessModal() {
+            if (!hasVoted) {
+                return; // Don't show if hasn't voted
+            }
+
+            // Set vote details
+            document.getElementById('votedCandidate').textContent = `${selectedCandidateNumber.toString().padStart(2, '0')} - ${selectedCandidateName}`;
+
+            // Set current time
+            const now = new Date();
+            const timeString = now.toLocaleString('id-ID', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('voteTime').textContent = `Dicatat pada: ${timeString}`;
+
+            // Show modal
+            document.getElementById('successModal').classList.remove('hidden');
+
+            // Add animation effect
+            const modal = document.getElementById('successModal').querySelector('div');
+            modal.style.transform = 'scale(0.8)';
+            modal.style.opacity = '0';
+
+            setTimeout(() => {
+                modal.style.transform = 'scale(1)';
+                modal.style.opacity = '1';
+                modal.style.transition = 'all 0.3s ease-out';
+            }, 100);
+        }
+
+        // Close success modal
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            // Here you can redirect to results page or do something else
+            // window.location.href = 'results.html';
+        }
+
+        // Show logout modal
+        function showLogoutModal() {
+            // Update session time
+            const now = new Date();
+            const sessionDuration = Math.floor((now - sessionStartTime) / 1000 / 60); // in minutes
+            document.getElementById('sessionTime').textContent = `Sesi aktif: ${sessionDuration} menit`;
+
+            const logoutModal = document.getElementById('logoutModal');
+            logoutModal.classList.remove('hidden');
+            logoutModal.classList.add('flex');
+
+            // Hide success modal if open
+            document.getElementById('successModal').classList.add('hidden');
+        }
+        function closeLogoutModal() {
+            const logoutModal = document.getElementById('logoutModal');
+            logoutModal.classList.add('hidden');
+            logoutModal.classList.remove('flex');
+            document.getElementById('logoutModal').classList.add('hidden');
+        }
+
+        // Confirm logout
+        function confirmLogout() {
+            // Redirect to login page
+            window.location.href = 'sign_in.html';
+        }
+
+        // Header logout button click handler
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerLogoutBtn = document.querySelector('header button');
+            if (headerLogoutBtn) {
+                headerLogoutBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showLogoutModal();
+                });
+            }
+        });
+
+        // Close modals when clicking outside
+        document.getElementById('confirmModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('successModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+
+        document.getElementById('logoutModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeLogoutModal();
+            }
+        });
+
+        // Prevent closing modals accidentally by clicking on modal content
+        document.getElementById('confirmModal').querySelector('div').addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        document.getElementById('successModal').querySelector('div').addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        document.getElementById('logoutModal').querySelector('div').addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        // Prevent double voting
+        document.querySelectorAll('.candidate-card button').forEach(button => {
+            button.addEventListener('click', function () {
+                if (hasVoted) {
+                    this.disabled = true;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
