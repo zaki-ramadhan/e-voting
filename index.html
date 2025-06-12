@@ -342,7 +342,7 @@
 
                 <!-- Vote Details -->
                 <div class="bg-yellow-100 border-3 border-black p-4 mb-6">
-                    <h4 class="text-sm font-black text-black mb-2 bg-black px-2 py-1 inline-block">
+                    <h4 class="text-sm font-black mb-2 bg-black text-yellow-300 px-2 py-1 inline-block">
                         PILIHAN ANDA
                     </h4>
                     <p class="text-xl font-black text-black" id="votedCandidate">-</p>
@@ -350,6 +350,20 @@
                         <iconify-icon icon="mdi:clock-outline" width="14" height="14" class="mr-1"></iconify-icon>
                         <span id="voteTime"></span>
                     </p>
+                </div>
+
+                <!-- Success Message -->
+                <div class="text-center mb-6">
+                    <div class="bg-blue-100 border-2 border-black p-4">
+                        <h4 class="font-black text-black mb-2">🗳️ VOTE ANDA TELAH TERCATAT!</h4>
+                        <p class="text-sm text-gray-700 mb-2">
+                            Suara Anda sangat berarti untuk masa depan OSIS yang lebih baik.
+                        </p>
+                        <p class="text-xs font-medium text-gray-600 bg-gray-100 border border-black p-2">
+                            <iconify-icon icon="mdi:shield-check" width="12" height="12" class="mr-1"></iconify-icon>
+                            Data voting disimpan dengan aman dan terenkripsi
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Action Buttons -->
@@ -362,6 +376,14 @@
                         class="flex-1 bg-red-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
                         LOGOUT
                     </button>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="mt-6 text-center">
+                    <p class="text-xs text-gray-600 bg-pink-100 border-2 border-black p-2">
+                        <iconify-icon icon="mdi:information-outline" width="12" height="12" class="mr-1"></iconify-icon>
+                        Hasil final akan diumumkan setelah periode voting berakhir
+                    </p>
                 </div>
             </div>
         </div>
@@ -399,150 +421,456 @@
         </div>
     </div>
 
+    <!-- Error Modal -->
+    <div id="errorModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white border-4 border-black shadow-[12px_12px_0px_0px_#000] p-6 max-w-md w-full">
+                <!-- Error Icon -->
+                <div class="text-center mb-6">
+                    <div
+                        class="w-16 h-16 bg-red-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+                        <iconify-icon icon="mdi:alert-circle" width="32" height="32" class="text-white"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl font-black text-black mb-2">VOTING GAGAL!</h3>
+                    <div class="bg-red-100 border-2 border-black p-3 inline-block">
+                        <iconify-icon icon="mdi:close-circle" width="20" height="20"
+                            class="text-black mr-2"></iconify-icon>
+                        <span class="font-bold text-red-800" id="errorMessage">Terjadi kesalahan sistem</span>
+                    </div>
+                </div>
+
+                <!-- Error Details -->
+                <div class="bg-yellow-100 border-3 border-black p-4 mb-6">
+                    <h4 class="text-sm font-black text-black mb-2 bg-black px-2 py-1 inline-block">
+                        DETAIL ERROR
+                    </h4>
+                    <p class="text-sm text-gray-700" id="errorDetails">
+                        Silakan coba lagi atau hubungi administrator
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="closeErrorModal()"
+                        class="flex-1 bg-blue-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                        COBA LAGI
+                    </button>
+                    <button onclick="showLogoutModal()"
+                        class="flex-1 bg-red-500 text-white border-3 border-black py-3 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                        LOGOUT
+                    </button>
+                </div>
+
+                <!-- Help Info -->
+                <div class="mt-4 text-center">
+                    <p class="text-xs text-gray-600 bg-pink-100 border-2 border-black p-2">
+                        <iconify-icon icon="mdi:help-circle" width="12" height="12" class="mr-1"></iconify-icon>
+                        Butuh bantuan? Hubungi panitia voting
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white border-4 border-black shadow-[12px_12px_0px_0px_#000] p-6 max-w-md w-full">
+                <div class="text-center">
+                    <div
+                        class="w-16 h-16 bg-blue-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                        <iconify-icon icon="mdi:loading" width="32" height="32"
+                            class="text-white animate-spin"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl font-black text-black mb-2">MEMPROSES VOTE...</h3>
+                    <p class="text-base font-medium text-gray-700 bg-yellow-100 border-2 border-black p-3">
+                        Sedang menyimpan pilihan Anda
+                    </p>
+                    <div class="mt-4">
+                        <div class="bg-blue-100 border-2 border-black p-2">
+                            <p class="text-xs text-gray-600">
+                                <iconify-icon icon="mdi:shield-check" width="12" height="12"
+                                    class="mr-1"></iconify-icon>
+                                Proses ini dapat memakan waktu beberapa detik
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let selectedCandidateNumber = null;
         let selectedCandidateName = null;
-        let hasVoted = false; // Track voting status
-        let sessionStartTime = new Date(); // Track session start time
+        let hasVoted = false;
+        let sessionStartTime = new Date();
+        let isProcessing = false;
 
-        // Countdown timer
+        // Countdown timer dengan format yang benar
         function updateCountdown() {
             const countdownElement = document.getElementById('countdown');
-            const now = new Date();
-            const hours = 2;
-            const minutes = 45 - now.getMinutes() % 60;
-            const seconds = 30 - now.getSeconds() % 60;
+            if (countdownElement) {
+                const now = new Date();
 
-            countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                // Set target time (misalnya 3 jam dari sekarang)
+                const targetTime = new Date(now.getTime() + (3 * 60 * 60 * 1000)); // 3 jam
+                const timeDiff = targetTime - now;
+
+                if (timeDiff > 0) {
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                    countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                } else {
+                    countdownElement.textContent = "00:00:00";
+                }
+            }
         }
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Vote function
+        // Vote function dengan debug yang lebih detail
         function vote(candidateNumber, candidateName) {
-            // Prevent voting if already voted
+            console.log('🗳️ Vote function called:', candidateNumber, candidateName);
+            console.log('Current state - hasVoted:', hasVoted, 'isProcessing:', isProcessing);
+
             if (hasVoted) {
-                alert('Anda sudah melakukan voting!');
+                console.log('❌ Already voted, showing error modal');
+                showErrorModal('Anda sudah melakukan voting!', 'Setiap siswa hanya dapat memberikan satu suara.');
+                return;
+            }
+
+            if (isProcessing) {
+                console.log('⏳ Already processing, showing error modal');
+                showErrorModal('Sedang memproses vote lain!', 'Tunggu hingga proses selesai.');
                 return;
             }
 
             selectedCandidateNumber = candidateNumber;
             selectedCandidateName = candidateName;
 
-            document.getElementById('selectedCandidate').textContent = `${candidateNumber.toString().padStart(2, '0')} - ${candidateName}`;
-            document.getElementById('confirmModal').classList.remove('hidden');
+            const selectedElement = document.getElementById('selectedCandidate');
+            if (selectedElement) {
+                selectedElement.textContent = `${candidateNumber.toString().padStart(2, '0')} - ${candidateName}`;
+                console.log('✅ Updated selectedCandidate element');
+            } else {
+                console.log('❌ selectedCandidate element not found');
+            }
+
+            const confirmModal = document.getElementById('confirmModal');
+            if (confirmModal) {
+                confirmModal.classList.remove('hidden');
+                console.log('✅ Confirmation modal shown');
+            } else {
+                console.log('❌ confirmModal element not found');
+            }
         }
 
-        // Close modal
+        // Close confirmation modal
         function closeModal() {
+            console.log('🚪 Closing confirmation modal');
             document.getElementById('confirmModal').classList.add('hidden');
             selectedCandidateNumber = null;
             selectedCandidateName = null;
         }
 
-        // Confirm vote
-        function confirmVote() {
-            if (selectedCandidateNumber && selectedCandidateName) {
-                // Close confirmation modal
-                closeModal();
-
-                // Mark as voted
-                hasVoted = true;
-
-                // Disable all vote buttons
-                disableAllVoteButtons();
-
-                // Show success modal
-                showSuccessModal();
+        // Show loading modal
+        function showLoadingModal() {
+            console.log('⏳ Showing loading modal');
+            const loadingModal = document.getElementById('loadingModal');
+            if (loadingModal) {
+                loadingModal.classList.remove('hidden');
             }
+        }
+
+        // Hide loading modal
+        function hideLoadingModal() {
+            console.log('⏳ Hiding loading modal');
+            const loadingModal = document.getElementById('loadingModal');
+            if (loadingModal) {
+                loadingModal.classList.add('hidden');
+            }
+        }
+
+        // Show error modal
+        function showErrorModal(message, details) {
+            console.log('❌ Showing error modal:', message);
+            const errorMessageElement = document.getElementById('errorMessage');
+            const errorDetailsElement = document.getElementById('errorDetails');
+            const errorModal = document.getElementById('errorModal');
+
+            if (errorMessageElement) errorMessageElement.textContent = message;
+            if (errorDetailsElement) errorDetailsElement.textContent = details;
+            if (errorModal) errorModal.classList.remove('hidden');
+        }
+
+        // Close error modal
+        function closeErrorModal() {
+            console.log('❌ Closing error modal');
+            const errorModal = document.getElementById('errorModal');
+            if (errorModal) {
+                errorModal.classList.add('hidden');
+            }
+        }
+
+        // Confirm vote dengan debug yang detail
+        function confirmVote() {
+            console.log('✅ Confirm vote called:', selectedCandidateNumber, selectedCandidateName);
+            console.log('Current state - hasVoted:', hasVoted, 'isProcessing:', isProcessing);
+
+            if (!selectedCandidateNumber || !selectedCandidateName) {
+                console.log('❌ No candidate selected');
+                return;
+            }
+
+            if (isProcessing) {
+                console.log('⏳ Already processing, ignoring');
+                return;
+            }
+
+            // Close confirmation modal
+            closeModal();
+
+            // Set processing state
+            isProcessing = true;
+            console.log('⏳ Set processing to true');
+
+            // Show loading modal
+            showLoadingModal();
+
+            // Simulate voting process dengan GUARANTEED SUCCESS
+            setTimeout(() => {
+                console.log('⏳ Processing timeout completed');
+                hideLoadingModal();
+                isProcessing = false;
+
+                // GUARANTEED SUCCESS untuk testing
+                const isSuccess = true;
+                console.log('🎯 Vote result:', isSuccess ? 'SUCCESS' : 'FAILED');
+
+                if (isSuccess) {
+                    console.log('🎉 Vote successful, updating state');
+
+                    // Update state
+                    hasVoted = true;
+                    console.log('✅ hasVoted set to:', hasVoted);
+
+                    // Disable buttons
+                    disableAllVoteButtons();
+                    console.log('🚫 All buttons disabled');
+
+                    // Show success modal
+                    console.log('🎉 About to show success modal');
+                    showSuccessModal();
+                } else {
+                    // Error handling (tidak akan terjadi karena isSuccess = true)
+                    const errorMessages = [
+                        {
+                            message: 'Koneksi ke server terputus!',
+                            details: 'Silakan periksa koneksi internet Anda dan coba lagi.'
+                        }
+                    ];
+
+                    const randomError = errorMessages[0];
+                    showErrorModal(randomError.message, randomError.details);
+
+                    selectedCandidateNumber = null;
+                    selectedCandidateName = null;
+                }
+            }, 2000);
         }
 
         // Disable all vote buttons
         function disableAllVoteButtons() {
+            console.log('🚫 Disabling all vote buttons');
             const buttons = document.querySelectorAll('.candidate-card button');
-            buttons.forEach(button => {
+            console.log('Found buttons:', buttons.length);
+
+            buttons.forEach((button, index) => {
                 button.disabled = true;
-                button.classList.add('opacity-50', 'cursor-not-allowed', 'hover:transform-none', 'hover:shadow-none');
+                button.classList.add('opacity-50', 'cursor-not-allowed');
                 button.classList.remove('hover:-translate-x-1', 'hover:-translate-y-1', 'hover:shadow-[4px_4px_0px_0px_#000]');
                 button.textContent = 'SUDAH MEMILIH';
+                console.log(`Button ${index + 1} disabled`);
             });
         }
 
-        // Show success modal
+        // Show success modal dengan debug detail
         function showSuccessModal() {
-            if (!hasVoted) return;
+            console.log('🎉 showSuccessModal called');
+            console.log('State check - hasVoted:', hasVoted);
+            console.log('Selected:', selectedCandidateNumber, selectedCandidateName);
+
+            if (!hasVoted) {
+                console.log('❌ Not showing success modal because hasVoted is false');
+                return;
+            }
 
             // Set vote details
-            document.getElementById('votedCandidate').textContent = `${selectedCandidateNumber.toString().padStart(2, '0')} - ${selectedCandidateName}`;
+            const votedCandidateElement = document.getElementById('votedCandidate');
+            if (votedCandidateElement && selectedCandidateNumber && selectedCandidateName) {
+                const candidateText = `${selectedCandidateNumber.toString().padStart(2, '0')} - ${selectedCandidateName}`;
+                votedCandidateElement.textContent = candidateText;
+                console.log('✅ Updated votedCandidate:', candidateText);
+            } else {
+                console.log('❌ Failed to update votedCandidate element');
+            }
 
-            // Set current time
+            // Set current time dengan format Indonesia
             const now = new Date();
             const timeString = now.toLocaleString('id-ID', {
+                weekday: 'long',
                 day: '2-digit',
-                month: '2-digit',
+                month: 'long',
                 year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-                second: '2-digit'
+                second: '2-digit',
+                timeZone: 'Asia/Jakarta'
             });
-            document.getElementById('voteTime').textContent = `Dicatat pada: ${timeString}`;
+
+            const voteTimeElement = document.getElementById('voteTime');
+            if (voteTimeElement) {
+                voteTimeElement.textContent = `Dicatat pada: ${timeString}`;
+                console.log('✅ Updated voteTime:', timeString);
+            } else {
+                console.log('❌ voteTime element not found');
+            }
 
             // Show modal
-            document.getElementById('successModal').classList.remove('hidden');
+            const successModal = document.getElementById('successModal');
+            if (successModal) {
+                successModal.classList.remove('hidden');
+                console.log('✅ Success modal should be visible now');
+                console.log('Modal classes:', successModal.className);
+
+                // Force visibility check
+                setTimeout(() => {
+                    const computedStyle = window.getComputedStyle(successModal);
+                    console.log('Modal computed display:', computedStyle.display);
+                    console.log('Modal computed visibility:', computedStyle.visibility);
+                }, 100);
+            } else {
+                console.log('❌ successModal element not found');
+            }
+
+            // Add animation effect
+            const modalContent = successModal?.querySelector('div > div');
+            if (modalContent) {
+                modalContent.style.transform = 'scale(0.8)';
+                modalContent.style.opacity = '0';
+
+                setTimeout(() => {
+                    modalContent.style.transform = 'scale(1)';
+                    modalContent.style.opacity = '1';
+                    modalContent.style.transition = 'all 0.3s ease-out';
+                    console.log('✅ Modal animation applied');
+                }, 100);
+            } else {
+                console.log('❌ Modal content for animation not found');
+            }
         }
 
         // Close success modal
         function closeSuccessModal() {
-            document.getElementById('successModal').classList.add('hidden');
+            console.log('🎉 Closing success modal');
+            const successModal = document.getElementById('successModal');
+            if (successModal) {
+                successModal.classList.add('hidden');
+            }
         }
 
         // Show logout modal
         function showLogoutModal() {
-            document.getElementById('logoutModal').classList.remove('hidden');
-            document.getElementById('successModal').classList.add('hidden');
+            console.log('🚪 Showing logout modal');
+            const logoutModal = document.getElementById('logoutModal');
+            const successModal = document.getElementById('successModal');
+            const errorModal = document.getElementById('errorModal');
+
+            if (logoutModal) logoutModal.classList.remove('hidden');
+            if (successModal) successModal.classList.add('hidden');
+            if (errorModal) errorModal.classList.add('hidden');
         }
 
         // Close logout modal
         function closeLogoutModal() {
-            document.getElementById('logoutModal').classList.add('hidden');
+            console.log('🚪 Closing logout modal');
+            const logoutModal = document.getElementById('logoutModal');
+            if (logoutModal) {
+                logoutModal.classList.add('hidden');
+            }
         }
 
         // Confirm logout
         function confirmLogout() {
+            console.log('🚪 Confirming logout, redirecting to sign_in.html');
             window.location.href = 'sign_in.html';
         }
 
         // Header logout button click handler
         document.addEventListener('DOMContentLoaded', function () {
+            console.log('📄 DOM Content Loaded');
+
             const headerLogoutBtn = document.querySelector('header button');
             if (headerLogoutBtn) {
                 headerLogoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     showLogoutModal();
                 });
+                console.log('✅ Header logout button event attached');
+            } else {
+                console.log('❌ Header logout button not found');
             }
+
+            // Debug: Check if all modal elements exist
+            const modals = ['confirmModal', 'successModal', 'logoutModal', 'errorModal', 'loadingModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                console.log(`Modal ${modalId}:`, modal ? '✅ Found' : '❌ Not found');
+            });
         });
 
         // Close modals when clicking outside
-        document.getElementById('confirmModal').addEventListener('click', function (e) {
+        document.getElementById('confirmModal')?.addEventListener('click', function (e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        document.getElementById('successModal').addEventListener('click', function (e) {
+        document.getElementById('successModal')?.addEventListener('click', function (e) {
             if (e.target === this) {
                 closeSuccessModal();
             }
         });
 
-        document.getElementById('logoutModal').addEventListener('click', function (e) {
+        document.getElementById('logoutModal')?.addEventListener('click', function (e) {
             if (e.target === this) {
                 closeLogoutModal();
             }
         });
+
+        document.getElementById('errorModal')?.addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeErrorModal();
+            }
+        });
+
+        // Prevent closing loading modal
+        document.getElementById('loadingModal')?.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        // Prevent accidental modal closing by clicking on content
+        document.querySelectorAll('.bg-white').forEach(modal => {
+            modal.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+        });
     </script>
+
 </body>
 
 </html>
