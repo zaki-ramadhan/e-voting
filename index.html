@@ -507,35 +507,143 @@
         let sessionStartTime = new Date();
         let isProcessing = false;
 
-        // Countdown timer dengan format yang benar
+        // Set waktu berakhir voting (contoh: 2 jam 45 menit 30 detik dari sekarang)
+        const votingEndTime = new Date();
+        votingEndTime.setHours(votingEndTime.getHours() + 2);
+        votingEndTime.setMinutes(votingEndTime.getMinutes() + 45);
+        votingEndTime.setSeconds(votingEndTime.getSeconds() + 30);
+
+        console.log('⏰ Voting akan berakhir pada:', votingEndTime.toLocaleString('id-ID'));
+
+        // Countdown timer yang berjalan mundur
         function updateCountdown() {
             const countdownElement = document.getElementById('countdown');
             if (countdownElement) {
                 const now = new Date();
-
-                // Set target time (misalnya 3 jam dari sekarang)
-                const targetTime = new Date(now.getTime() + (3 * 60 * 60 * 1000)); // 3 jam
-                const timeDiff = targetTime - now;
+                const timeDiff = votingEndTime - now;
 
                 if (timeDiff > 0) {
+                    // Hitung jam, menit, detik yang tersisa
                     const hours = Math.floor(timeDiff / (1000 * 60 * 60));
                     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-                    countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    // Format dengan leading zero
+                    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    countdownElement.textContent = formattedTime;
+
+                    // Ubah warna berdasarkan waktu tersisa
+                    const totalMinutesLeft = Math.floor(timeDiff / (1000 * 60));
+
+                    if (totalMinutesLeft <= 5) {
+                        // Merah jika kurang dari 5 menit
+                        countdownElement.className = 'text-2xl font-black text-red-600';
+                        countdownElement.parentElement.className = 'bg-red-100 border-2 border-black p-3';
+                    } else if (totalMinutesLeft <= 30) {
+                        // Orange jika kurang dari 30 menit
+                        countdownElement.className = 'text-2xl font-black text-orange-600';
+                        countdownElement.parentElement.className = 'bg-orange-100 border-2 border-black p-3';
+                    } else {
+                        // Merah normal untuk waktu yang masih banyak
+                        countdownElement.className = 'text-2xl font-black text-red-600';
+                        countdownElement.parentElement.className = 'bg-red-100 border-2 border-black p-3';
+                    }
+
+                    console.log(`⏰ Waktu tersisa: ${formattedTime} (${totalMinutesLeft} menit)`);
                 } else {
+                    // Waktu habis
                     countdownElement.textContent = "00:00:00";
+                    countdownElement.className = 'text-2xl font-black text-red-600';
+
+                    // Disable semua tombol voting
+                    disableAllVoteButtons();
+
+                    // Tampilkan pesan waktu habis
+                    showTimeUpModal();
+
+                    console.log('⏰ Waktu voting telah habis!');
                 }
             }
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // Fungsi untuk menampilkan modal waktu habis
+        function showTimeUpModal() {
+            // Buat modal waktu habis jika belum ada
+            let timeUpModal = document.getElementById('timeUpModal');
+            if (!timeUpModal) {
+                timeUpModal = document.createElement('div');
+                timeUpModal.id = 'timeUpModal';
+                timeUpModal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+                timeUpModal.innerHTML = `
+                    <div class="flex items-center justify-center min-h-screen p-4">
+                        <div class="bg-white border-4 border-black shadow-[16px_16px_0px_0px_#000] p-8 max-w-lg w-full">
+                            <!-- Time Up Icon -->
+                            <div class="text-center mb-6">
+                                <div class="w-16 h-16 bg-red-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <iconify-icon icon="mdi:clock-alert" width="32" height="32" class="text-white"></iconify-icon>
+                                </div>
+                                <h3 class="text-3xl font-black text-black mb-2">WAKTU HABIS!</h3>
+                                <div class="bg-red-100 border-2 border-black p-3 inline-block">
+                                    <iconify-icon icon="mdi:timer-off" width="20" height="20" class="text-black mr-2"></iconify-icon>
+                                    <span class="font-bold text-red-800">Periode voting telah berakhir</span>
+                                </div>
+                            </div>
+
+                            <!-- Time Up Message -->
+                            <div class="text-center mb-6">
+                                <div class="bg-yellow-100 border-2 border-black p-4">
+                                    <h4 class="font-black text-black mb-2">⏰ VOTING DITUTUP!</h4>
+                                    <p class="text-sm text-gray-700 mb-2">
+                                        Periode voting untuk Pemilihan Ketua OSIS 2025 telah berakhir.
+                                    </p>
+                                    <p class="text-xs font-medium text-gray-600 bg-gray-100 border border-black p-2">
+                                        <iconify-icon icon="mdi:information" width="12" height="12" class="mr-1"></iconify-icon>
+                                        Hasil akan diumumkan dalam waktu dekat
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Action Button -->
+                            <div class="flex justify-center">
+                                <button onclick="window.location.href='sign_in.html'"
+                                    class="bg-blue-500 text-white border-3 border-black py-3 px-6 font-black hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all">
+                                    KEMBALI KE LOGIN
+                                </button>
+                            </div>
+
+                            <!-- Additional Info -->
+                            <div class="mt-6 text-center">
+                                <p class="text-xs text-gray-600 bg-pink-100 border-2 border-black p-2">
+                                    <iconify-icon icon="mdi:trophy" width="12" height="12" class="mr-1"></iconify-icon>
+                                    Terima kasih atas partisipasi Anda dalam pemilihan ini!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(timeUpModal);
+            }
+
+            // Tampilkan modal
+            timeUpModal.classList.remove('hidden');
+        }
+
+        // Update countdown setiap detik
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Jalankan langsung saat load
 
         // Vote function dengan debug yang lebih detail
         function vote(candidateNumber, candidateName) {
             console.log('🗳️ Vote function called:', candidateNumber, candidateName);
             console.log('Current state - hasVoted:', hasVoted, 'isProcessing:', isProcessing);
+
+            // Cek apakah masih dalam periode voting
+            const now = new Date();
+            if (now >= votingEndTime) {
+                console.log('⏰ Voting time is over');
+                showTimeUpModal();
+                return;
+            }
 
             if (hasVoted) {
                 console.log('❌ Already voted, showing error modal');
@@ -621,6 +729,15 @@
             console.log('✅ Confirm vote called:', selectedCandidateNumber, selectedCandidateName);
             console.log('Current state - hasVoted:', hasVoted, 'isProcessing:', isProcessing);
 
+            // Double check waktu voting
+            const now = new Date();
+            if (now >= votingEndTime) {
+                console.log('⏰ Voting time expired during confirmation');
+                closeModal();
+                showTimeUpModal();
+                return;
+            }
+
             if (!selectedCandidateNumber || !selectedCandidateName) {
                 console.log('❌ No candidate selected');
                 return;
@@ -693,7 +810,15 @@
                 button.disabled = true;
                 button.classList.add('opacity-50', 'cursor-not-allowed');
                 button.classList.remove('hover:-translate-x-1', 'hover:-translate-y-1', 'hover:shadow-[4px_4px_0px_0px_#000]');
-                button.textContent = 'SUDAH MEMILIH';
+
+                // Ubah text berdasarkan kondisi
+                const now = new Date();
+                if (now >= votingEndTime) {
+                    button.textContent = 'VOTING DITUTUP';
+                } else {
+                    button.textContent = 'SUDAH MEMILIH';
+                }
+
                 console.log(`Button ${index + 1} disabled`);
             });
         }
@@ -813,6 +938,7 @@
         // Header logout button click handler
         document.addEventListener('DOMContentLoaded', function () {
             console.log('📄 DOM Content Loaded');
+            console.log('⏰ Countdown timer started, voting ends at:', votingEndTime.toLocaleString('id-ID'));
 
             const headerLogoutBtn = document.querySelector('header button');
             if (headerLogoutBtn) {
@@ -831,6 +957,13 @@
                 const modal = document.getElementById(modalId);
                 console.log(`Modal ${modalId}:`, modal ? '✅ Found' : '❌ Not found');
             });
+        });
+
+        // Clean up interval when page unloads
+        window.addEventListener('beforeunload', function () {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
         });
 
         // Close modals when clicking outside
